@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fuermolv.book.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="fuermolv.book.entity.Student">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="sName" jdbcType="VARCHAR" property="sname" />
+    <result column="sCollege" jdbcType="VARCHAR" property="scollege" />
+    <result column="sMajor" jdbcType="VARCHAR" property="smajor" />
+    <result column="sClass" jdbcType="VARCHAR" property="sclass" />
+    <result column="sSex" jdbcType="VARCHAR" property="ssex" />
+    <result column="sAge" jdbcType="VARCHAR" property="sage" />
+    <result column="sZone" jdbcType="VARCHAR" property="szone" />
+    <result column="sAddress" jdbcType="VARCHAR" property="saddress" />
+    <result column="sRecord" jdbcType="VARCHAR" property="srecord" />
+    <result column="sPic" jdbcType="VARCHAR" property="spic" />
+    <result column="sIdentification" jdbcType="VARCHAR" property="sidentification" />
+    <result column="sGrade" jdbcType="VARCHAR" property="sgrade" />
+    <result column="sRemark" jdbcType="VARCHAR" property="sremark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sid, sName, sCollege, sMajor, sClass, sSex, sAge, sZone, sAddress, sRecord, sPic, 
+    sIdentification, sGrade, sRemark
+  </sql>
+  <select id="selectByExample" parameterType="fuermolv.book.entity.StudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="fuermolv.book.entity.StudentExample">
+    delete from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="fuermolv.book.entity.Student">
+    insert into student (sid, sName, sCollege, 
+      sMajor, sClass, sSex, 
+      sAge, sZone, sAddress, 
+      sRecord, sPic, sIdentification, 
+      sGrade, sRemark)
+    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{scollege,jdbcType=VARCHAR}, 
+      #{smajor,jdbcType=VARCHAR}, #{sclass,jdbcType=VARCHAR}, #{ssex,jdbcType=VARCHAR}, 
+      #{sage,jdbcType=VARCHAR}, #{szone,jdbcType=VARCHAR}, #{saddress,jdbcType=VARCHAR}, 
+      #{srecord,jdbcType=VARCHAR}, #{spic,jdbcType=VARCHAR}, #{sidentification,jdbcType=VARCHAR}, 
+      #{sgrade,jdbcType=VARCHAR}, #{sremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="fuermolv.book.entity.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="sname != null">
+        sName,
+      </if>
+      <if test="scollege != null">
+        sCollege,
+      </if>
+      <if test="smajor != null">
+        sMajor,
+      </if>
+      <if test="sclass != null">
+        sClass,
+      </if>
+      <if test="ssex != null">
+        sSex,
+      </if>
+      <if test="sage != null">
+        sAge,
+      </if>
+      <if test="szone != null">
+        sZone,
+      </if>
+      <if test="saddress != null">
+        sAddress,
+      </if>
+      <if test="srecord != null">
+        sRecord,
+      </if>
+      <if test="spic != null">
+        sPic,
+      </if>
+      <if test="sidentification != null">
+        sIdentification,
+      </if>
+      <if test="sgrade != null">
+        sGrade,
+      </if>
+      <if test="sremark != null">
+        sRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sname != null">
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="scollege != null">
+        #{scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="smajor != null">
+        #{smajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sclass != null">
+        #{sclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sage != null">
+        #{sage,jdbcType=VARCHAR},
+      </if>
+      <if test="szone != null">
+        #{szone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null">
+        #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="srecord != null">
+        #{srecord,jdbcType=VARCHAR},
+      </if>
+      <if test="spic != null">
+        #{spic,jdbcType=VARCHAR},
+      </if>
+      <if test="sidentification != null">
+        #{sidentification,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null">
+        #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="sremark != null">
+        #{sremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="fuermolv.book.entity.StudentExample" resultType="java.lang.Long">
+    select count(*) from student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update student
+    <set>
+      <if test="record.sid != null">
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sname != null">
+        sName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.scollege != null">
+        sCollege = #{record.scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smajor != null">
+        sMajor = #{record.smajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sclass != null">
+        sClass = #{record.sclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ssex != null">
+        sSex = #{record.ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sage != null">
+        sAge = #{record.sage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.szone != null">
+        sZone = #{record.szone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saddress != null">
+        sAddress = #{record.saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srecord != null">
+        sRecord = #{record.srecord,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spic != null">
+        sPic = #{record.spic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sidentification != null">
+        sIdentification = #{record.sidentification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sgrade != null">
+        sGrade = #{record.sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sremark != null">
+        sRemark = #{record.sremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update student
+    set sid = #{record.sid,jdbcType=INTEGER},
+      sName = #{record.sname,jdbcType=VARCHAR},
+      sCollege = #{record.scollege,jdbcType=VARCHAR},
+      sMajor = #{record.smajor,jdbcType=VARCHAR},
+      sClass = #{record.sclass,jdbcType=VARCHAR},
+      sSex = #{record.ssex,jdbcType=VARCHAR},
+      sAge = #{record.sage,jdbcType=VARCHAR},
+      sZone = #{record.szone,jdbcType=VARCHAR},
+      sAddress = #{record.saddress,jdbcType=VARCHAR},
+      sRecord = #{record.srecord,jdbcType=VARCHAR},
+      sPic = #{record.spic,jdbcType=VARCHAR},
+      sIdentification = #{record.sidentification,jdbcType=VARCHAR},
+      sGrade = #{record.sgrade,jdbcType=VARCHAR},
+      sRemark = #{record.sremark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="fuermolv.book.entity.Student">
+    update student
+    <set>
+      <if test="sname != null">
+        sName = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="scollege != null">
+        sCollege = #{scollege,jdbcType=VARCHAR},
+      </if>
+      <if test="smajor != null">
+        sMajor = #{smajor,jdbcType=VARCHAR},
+      </if>
+      <if test="sclass != null">
+        sClass = #{sclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ssex != null">
+        sSex = #{ssex,jdbcType=VARCHAR},
+      </if>
+      <if test="sage != null">
+        sAge = #{sage,jdbcType=VARCHAR},
+      </if>
+      <if test="szone != null">
+        sZone = #{szone,jdbcType=VARCHAR},
+      </if>
+      <if test="saddress != null">
+        sAddress = #{saddress,jdbcType=VARCHAR},
+      </if>
+      <if test="srecord != null">
+        sRecord = #{srecord,jdbcType=VARCHAR},
+      </if>
+      <if test="spic != null">
+        sPic = #{spic,jdbcType=VARCHAR},
+      </if>
+      <if test="sidentification != null">
+        sIdentification = #{sidentification,jdbcType=VARCHAR},
+      </if>
+      <if test="sgrade != null">
+        sGrade = #{sgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="sremark != null">
+        sRemark = #{sremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="fuermolv.book.entity.Student">
+    update student
+    set sName = #{sname,jdbcType=VARCHAR},
+      sCollege = #{scollege,jdbcType=VARCHAR},
+      sMajor = #{smajor,jdbcType=VARCHAR},
+      sClass = #{sclass,jdbcType=VARCHAR},
+      sSex = #{ssex,jdbcType=VARCHAR},
+      sAge = #{sage,jdbcType=VARCHAR},
+      sZone = #{szone,jdbcType=VARCHAR},
+      sAddress = #{saddress,jdbcType=VARCHAR},
+      sRecord = #{srecord,jdbcType=VARCHAR},
+      sPic = #{spic,jdbcType=VARCHAR},
+      sIdentification = #{sidentification,jdbcType=VARCHAR},
+      sGrade = #{sgrade,jdbcType=VARCHAR},
+      sRemark = #{sremark,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fuermolv.book.dao.ClassMapper">
+  <resultMap id="BaseResultMap" type="fuermolv.book.entity.Class">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cName" jdbcType="VARCHAR" property="cname" />
+    <result column="cTeacher" jdbcType="VARCHAR" property="cteacher" />
+    <result column="cCategory" jdbcType="VARCHAR" property="ccategory" />
+    <result column="cPeriod" jdbcType="VARCHAR" property="cperiod" />
+    <result column="cRemark" jdbcType="VARCHAR" property="cremark" />
+    <result column="cStudentNumber" jdbcType="VARCHAR" property="cstudentnumber" />
+    <result column="cCollege" jdbcType="VARCHAR" property="ccollege" />
+    <result column="cBeginTime" jdbcType="DATE" property="cbegintime" />
+    <result column="cEndTime" jdbcType="DATE" property="cendtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cid, cName, cTeacher, cCategory, cPeriod, cRemark, cStudentNumber, cCollege, cBeginTime, 
+    cEndTime
+  </sql>
+  <select id="selectByExample" parameterType="fuermolv.book.entity.ClassExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from class
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from class
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="fuermolv.book.entity.ClassExample">
+    delete from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="fuermolv.book.entity.Class">
+    insert into class (cid, cName, cTeacher, 
+      cCategory, cPeriod, cRemark, 
+      cStudentNumber, cCollege, cBeginTime, 
+      cEndTime)
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{cteacher,jdbcType=VARCHAR}, 
+      #{ccategory,jdbcType=VARCHAR}, #{cperiod,jdbcType=VARCHAR}, #{cremark,jdbcType=VARCHAR}, 
+      #{cstudentnumber,jdbcType=VARCHAR}, #{ccollege,jdbcType=VARCHAR}, #{cbegintime,jdbcType=DATE}, 
+      #{cendtime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="fuermolv.book.entity.Class">
+    insert into class
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="cname != null">
+        cName,
+      </if>
+      <if test="cteacher != null">
+        cTeacher,
+      </if>
+      <if test="ccategory != null">
+        cCategory,
+      </if>
+      <if test="cperiod != null">
+        cPeriod,
+      </if>
+      <if test="cremark != null">
+        cRemark,
+      </if>
+      <if test="cstudentnumber != null">
+        cStudentNumber,
+      </if>
+      <if test="ccollege != null">
+        cCollege,
+      </if>
+      <if test="cbegintime != null">
+        cBeginTime,
+      </if>
+      <if test="cendtime != null">
+        cEndTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cteacher != null">
+        #{cteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="ccategory != null">
+        #{ccategory,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null">
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="cremark != null">
+        #{cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="cstudentnumber != null">
+        #{cstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ccollege != null">
+        #{ccollege,jdbcType=VARCHAR},
+      </if>
+      <if test="cbegintime != null">
+        #{cbegintime,jdbcType=DATE},
+      </if>
+      <if test="cendtime != null">
+        #{cendtime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="fuermolv.book.entity.ClassExample" resultType="java.lang.Long">
+    select count(*) from class
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update class
+    <set>
+      <if test="record.cid != null">
+        cid = #{record.cid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cname != null">
+        cName = #{record.cname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cteacher != null">
+        cTeacher = #{record.cteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ccategory != null">
+        cCategory = #{record.ccategory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cperiod != null">
+        cPeriod = #{record.cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cremark != null">
+        cRemark = #{record.cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cstudentnumber != null">
+        cStudentNumber = #{record.cstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ccollege != null">
+        cCollege = #{record.ccollege,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cbegintime != null">
+        cBeginTime = #{record.cbegintime,jdbcType=DATE},
+      </if>
+      <if test="record.cendtime != null">
+        cEndTime = #{record.cendtime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update class
+    set cid = #{record.cid,jdbcType=INTEGER},
+      cName = #{record.cname,jdbcType=VARCHAR},
+      cTeacher = #{record.cteacher,jdbcType=VARCHAR},
+      cCategory = #{record.ccategory,jdbcType=VARCHAR},
+      cPeriod = #{record.cperiod,jdbcType=VARCHAR},
+      cRemark = #{record.cremark,jdbcType=VARCHAR},
+      cStudentNumber = #{record.cstudentnumber,jdbcType=VARCHAR},
+      cCollege = #{record.ccollege,jdbcType=VARCHAR},
+      cBeginTime = #{record.cbegintime,jdbcType=DATE},
+      cEndTime = #{record.cendtime,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="fuermolv.book.entity.Class">
+    update class
+    <set>
+      <if test="cname != null">
+        cName = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="cteacher != null">
+        cTeacher = #{cteacher,jdbcType=VARCHAR},
+      </if>
+      <if test="ccategory != null">
+        cCategory = #{ccategory,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null">
+        cPeriod = #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="cremark != null">
+        cRemark = #{cremark,jdbcType=VARCHAR},
+      </if>
+      <if test="cstudentnumber != null">
+        cStudentNumber = #{cstudentnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ccollege != null">
+        cCollege = #{ccollege,jdbcType=VARCHAR},
+      </if>
+      <if test="cbegintime != null">
+        cBeginTime = #{cbegintime,jdbcType=DATE},
+      </if>
+      <if test="cendtime != null">
+        cEndTime = #{cendtime,jdbcType=DATE},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="fuermolv.book.entity.Class">
+    update class
+    set cName = #{cname,jdbcType=VARCHAR},
+      cTeacher = #{cteacher,jdbcType=VARCHAR},
+      cCategory = #{ccategory,jdbcType=VARCHAR},
+      cPeriod = #{cperiod,jdbcType=VARCHAR},
+      cRemark = #{cremark,jdbcType=VARCHAR},
+      cStudentNumber = #{cstudentnumber,jdbcType=VARCHAR},
+      cCollege = #{ccollege,jdbcType=VARCHAR},
+      cBeginTime = #{cbegintime,jdbcType=DATE},
+      cEndTime = #{cendtime,jdbcType=DATE}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>
