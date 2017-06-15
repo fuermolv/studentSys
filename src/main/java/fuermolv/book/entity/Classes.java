@@ -2,7 +2,7 @@ package fuermolv.book.entity;
 
 import java.util.Date;
 
-public class Class {
+public class Classes {
     private Integer cid;
 
     private String cname;

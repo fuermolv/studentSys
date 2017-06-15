@@ -10,13 +10,13 @@
             <property name="suppressAllComments" value="true"/>  
         </commentGenerator>   
     <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://119.23.214.28:3306/book" userId="root" password="root" />
-    <javaModelGenerator targetPackage="fuermolv.book.entity" targetProject="book/src/main/java" />
-    <sqlMapGenerator targetPackage="fuermolv.book.mapper" targetProject="book/src/main/java" />
-    <javaClientGenerator targetPackage="fuermolv.book.dao" targetProject="book/src/main/java" type="XMLMAPPER" />
+    <javaModelGenerator targetPackage="fuermolv.book.entity" targetProject="studentSys/src/main/java" />
+    <sqlMapGenerator targetPackage="fuermolv.book.mapper" targetProject="studentSys/src/main/java" />
+    <javaClientGenerator targetPackage="fuermolv.book.dao" targetProject="studentSys/src/main/java" type="XMLMAPPER" />
     <!-- <table schema="books" tableName="books" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
     enableSelectByExample="false" selectByExampleQueryId="false">
     </table> -->
-     <table schema="class" tableName="class">
+     <table schema="classes" tableName="classes">
     </table>
      <table schema="student" tableName="student">
     </table>
